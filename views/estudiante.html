@@ -10,6 +10,7 @@
 </head>
 <body>
     <header>
+        <!--Inicio del sistema y SOLO dos paginas -->
         <nav>
             <div class="logo">
                 <img src="/public/img/LogoS.png" alt="Logo">
@@ -22,14 +23,68 @@
                 <a href="acerca.html">acerca del alumno</a>
             </div>
         </nav>
+        <header>
+        <!--Navegador del alumno con los datos a consultar -->
         <div class="wrap">
             <ul class="tabs">
-                <li><a href="#">Calificaciones</a></li>
-                <li><a href="#">Asistencias</a></li>
-                <li><a href="#">Horario</a></li>              
+                <li><a href="#tab1" class="activar"><span>Calificaciones</span></a></li>
+                <li><a href="#tab2"><span>Asitencias</span></a></li>
+                <li><a href="#tab3"><Span>Horario</Span></a></li>   
+                <li><a href="#tab4"><Span>Contactar</Span></a></li>                 
             </ul>
+            <div class="secciones">
+                <h2 id="tab1">Calificaciones</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nombre</th>
+                            <th>Materia</th>
+                            <th>Calificación</th>
+                        </tr>
+                    </thead>
+                </table>
+
+                <h2 id="tab2">Asistencias del Alumno</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nombre</th>
+                            <th>Porcentaje de asistencias</th>
+                            <th>Profesor</th>
+                        </tr>
+                    </thead>
+                </table>
+
+                <h2 id="tab3">Horario de clases</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nombre</th>
+                            <th>Profesor</th>
+                            <th>Salon</th>
+                        </tr>
+                    </thead>
+                </table>
+                <div class="tab4">
+                    <div class="info">
+                        <h2>Contactar</h2>
+                        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Amet, officiis tempore dicta minus dolor dolore aspernatur in debitis explicabo qui quibusdam quae doloremque error! Cupiditate eligendi laudantium excepturi ullam atque.</p>
+                        <a href="#"><i></i>123-456-789</a>
+                        <a href="#"><i></i>email@hola.com</a>
+                        <a href="#"><i></i>Ciudad, Pais</a>
+                    </div>
+                    <form action="#" autocomplete="off">
+                        <input type="text" name="Nombre" placeholder="Ingresa tu nombre" class="campo">
+                        <input type="email" name="email" placeholder="Ingresa tu correo" class="campo">
+                        <textarea name="mensaje" placeholder="Ingresa tu mensaje" id=""></textarea>
+                        <button name="enviar" class="btn-enviar">enviar mensaje</button>
+                    </form>
+                </div>
+            </div>
         </div>
-    </header>
     <script src="/public/js/main.js"></script>
 </body>
 </html>
