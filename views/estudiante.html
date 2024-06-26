@@ -9,8 +9,8 @@
     <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,700,800" rel="stylesheet">
 </head>
 <body>
-    <header>
-        <!--Inicio del sistema y SOLO dos paginas -->
+    <header class="F1">
+        <!-- Inicio del sistema y SOLO dos páginas -->
         <nav>
             <div class="logo">
                 <img src="/public/img/LogoS.png" alt="Logo">
@@ -19,21 +19,27 @@
                 <span>&#9776;</span>
             </div>
             <div class="enlaces uno" id="enlaces">
-                <a href="estudiante.html" class="active">Inicio</a>
-                <a href="acerca.html">acerca del alumno</a>
+                <a href="EstudianteSalida.html">Salir</a>
             </div>
         </nav>
-        <header>
-        <!--Navegador del alumno con los datos a consultar -->
-        <div class="wrap">
-            <ul class="tabs">
-                <li><a href="#tab1" class="activar"><span>Calificaciones</span></a></li>
-                <li><a href="#tab2"><span>Asitencias</span></a></li>
-                <li><a href="#tab3"><Span>Horario</Span></a></li>   
-                <li><a href="#tab4"><Span>Contactar</Span></a></li>                 
-            </ul>
-            <div class="secciones">
-                <h2 id="tab1">Calificaciones</h2>
+    <main>
+        <ul class="tabs">
+            <li><a href="#tab1" class="activar"><span>Calificaciones</span></a></li>
+            <li><a href="#tab2" class="activar"><span>Asistencias</span></a></li>
+            <li><a href="#tab3" class="activar"><span>Horario</span></a></li>
+            <li><a href="#tab4" class="activar"><span>Contactar</span></a></li>
+        </ul>
+        <!-- Cuadro de búsqueda -->
+        <div class="search-container">
+            <form id="searchForm">
+                <input type="text" id="searchInput" name="search" placeholder="Buscar por ID o Nombre...">
+                <button type="submit" id="searchButton">Buscar</button>
+            </form>
+        </div>
+        <!-- Datos a consultar -->
+            <section id="tab1" class="Tabla">
+                <h2>Calificaciones</h2>
+                <!-- Vista para alumnos -->
                 <table>
                     <thead>
                         <tr>
@@ -44,8 +50,9 @@
                         </tr>
                     </thead>
                 </table>
-
-                <h2 id="tab2">Asistencias del Alumno</h2>
+            </section>
+            <section id="tab2" class="Tabla">
+                <h2>Asistencias</h2>
                 <table>
                     <thead>
                         <tr>
@@ -56,8 +63,9 @@
                         </tr>
                     </thead>
                 </table>
-
-                <h2 id="tab3">Horario de clases</h2>
+            </section>
+            <section id="tab3" class="Tabla">
+                <h2>Horario de Clases</h2>
                 <table>
                     <thead>
                         <tr>
@@ -68,6 +76,9 @@
                         </tr>
                     </thead>
                 </table>
+            </section>
+            <section id="tab4" class="Tabla">
+                <h2>Contactar</h2>
                 <div class="tab4">
                     <div class="info">
                         <h2>Contactar</h2>
@@ -80,11 +91,12 @@
                         <input type="text" name="Nombre" placeholder="Ingresa tu nombre" class="campo">
                         <input type="email" name="email" placeholder="Ingresa tu correo" class="campo">
                         <textarea name="mensaje" placeholder="Ingresa tu mensaje" id=""></textarea>
-                        <button name="enviar" class="btn-enviar">enviar mensaje</button>
+                        <button name="enviar" class="btn-enviar">Enviar mensaje</button>
                     </form>
                 </div>
-            </div>
-        </div>
+            </section>
+        </main>
+    </header>
     <script src="/public/js/main.js"></script>
 </body>
 </html>
