@@ -22,13 +22,12 @@
         </nav>
         <div class="textos">
             <h1>Salir</h1>
-            <h2>Estas apunto de Salir</h2>
-                    <!-- Conectar con parte de felipe -->
-            <form action="/logout" method="post">
-                <button class="btn-cerrar-sesion" onclick="cerrarSesion()">Cerrar Sesión</button>
-            </form
+            <h2>Estás a punto de salir</h2>
+            <form id="logoutForm" action="/logout" method="post">
+                <button type="submit" class="btn-cerrar-sesion">Cerrar Sesión</button>
+            </form>
         </div>
     </header>
-    <script src="/public/js/Usuario.js"></script>
+    <script src="/public/js/logout.js"></script>
 </body>
 </html>

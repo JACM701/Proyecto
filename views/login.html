@@ -9,23 +9,26 @@
 <body>
     <div class="formulario">
         <h1>Inicio de sesión</h1>
-        <form method="post">
+        <form id="loginForm">
             <div class="username">
-                <input type="text" required>
+                <input type="text" id="username" name="username" required>
                 <label>Nombre de Usuario</label>
             </div>
             <div class="username">
-                <input type="password" required>
+                <input type="password" id="password" name="password" required>
                 <label>Contraseña</label>
             </div>
             <div class="recordar">
                 <a href="">¿Olvidó su Contraseña?</a>
             </div>
-            <button type="submit" value="Iniciar">Iniciar Sesión</button>
+            <button type="submit">Iniciar Sesión</button>
             <div class="registrarse">
                 Soy <a href="registrado.html">Alumno</a>
             </div>
         </form>
+        <div id="message"></div>
     </div>
+
+    <script src="/public/js/login.js"></script>
 </body>
 </html>

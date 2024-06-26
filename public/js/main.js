@@ -32,10 +32,3 @@ window.addEventListener('click',function(e){
         }
     }
 });
-function cerrarSesion() {
-    // Aquí puedes agregar el código necesario para cerrar la sesión del usuario,
-    // como limpiar cookies, eliminar tokens de autenticación, etc.
-    alert('Sesión cerrada correctamente');
-    // Luego, redirecciona al usuario a la página de inicio de sesión u otra página según sea necesario.
-    window.location.href = '/public/css/Menu.css'; // Cambia la URL según la ubicación correcta
-}
