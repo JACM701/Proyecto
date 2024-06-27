@@ -1,3 +1,4 @@
+//Acceso a Maestros
 document.addEventListener('DOMContentLoaded', function() {
     const form = document.getElementById('loginForm');
     const message = document.getElementById('message');
@@ -16,14 +17,14 @@ document.addEventListener('DOMContentLoaded', function() {
             // Aquí podrías redirigir al usuario a otra página, por ejemplo:
             // window.location.href = '/dashboard.html';
             //Cambiar por lo de karla
-            window.location.href = "/views/docente.html"
+            window.location.href = "/control-escolar-react/public/index.html"
         } else {
             // Inicio de sesión fallido
             message.innerHTML = '<p class="error">Credenciales incorrectas. Inténtalo de nuevo.</p>';
         }
     });
 });
-
+//Acceso a Alumnos
 document.addEventListener('DOMContentLoaded', function() {
     const form = document.getElementById('loginForm');
     const message = document.getElementById('message');

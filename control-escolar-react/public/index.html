@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Índice de la Página</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f2f2f2;
+        }
+
+        header {
+            background: #333;
+            color: #fff;
+            padding: 15px 0;
+            text-align: center;
+        }  
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        nav ul li {
+            display: inline;
+            margin-right: 20px;
+        }
+
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            padding: 5px 10px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        nav ul li a:hover, nav ul li a.active {
+            background-color: #575757;
+            border-radius: 5px;
+        }
+
+        main {
+            padding: 20px;
+        }
+
+        section {
+            display: none;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        section.active {
+            display: block;
+        }
+
+        h2, h3 {
+            color: #333;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+
+        form {
+            margin-bottom: 20px;
+        }
+
+        form input, form select, form button {
+            margin-right: 10px;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        form button {
+            background-color: #333;
+            color: #fff;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        form button:hover {
+            background-color: #575757;
+        }
+
+        address {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Bienvenido al Sistema</h1>
+        <nav>
+            <ul>
+                <li><a href="#inicio" onclick="showSection('inicio')" class="active">Inicio</a></li>
+                <li><a href="#inscritos" onclick="showSection('inscritos')">Inscritos</a></li>
+                <li><a href="#calificaciones" onclick="showSection('calificaciones')">Calificaciones</a></li>
+                <li><a href="#horarios" onclick="showSection('horarios')">Horarios</a></li>
+                <li><a href="#asistencias" onclick="showSection('asistencias')">Asistencias</a></li>
+                <li><a href="#documentacion" onclick="showSection('documentacion')">Documentación</a></li>
+                <li><a href="#atencion" onclick="showSection('atencion')">Atención</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section id="inicio" class="active">
+            <h2>Inicio</h2>
+            <p>Bienvenido al inicio del sistema. Aquí puedes acceder a todas las funcionalidades del sistema a través del menú de navegación.</p>
+        </section>
+        <section id="inscritos">
+            <h2>Inscritos</h2>
+            <p>Lista de inscritos en el sistema. Aquí puedes ver la lista de todos los estudiantes inscritos.</p>
+            <form id="form-inscritos" onsubmit="addInscrito(event)">
+                <input type="text" id="nombreInscrito" placeholder="Nombre" required>
+                <button type="submit">Agregar</button>
+            </form>
+            <ul id="lista-inscritos">
+                <li>Juan Pérez</li>
+                <li>María García</li>
+                <li>Pedro Rodríguez</li>
+                <li>Ana Fernández</li>
+            </ul>
+        </section>
+        <section id="calificaciones">
+            <h2>Calificaciones</h2>
+            <p>Sección de calificaciones. Aquí puedes consultar las calificaciones de todos los estudiantes.</p>
+            <form id="form-calificaciones" onsubmit="addCalificacion(event)">
+                <input type="text" id="nombreCalificacion" placeholder="Nombre" required>
+                <input type="text" id="materiaCalificacion" placeholder="Materia" required>
+                <input type="number" id="notaCalificacion" placeholder="Calificación" required min="0" max="100">
+                <button type="submit">Agregar</button>
+            </form>
+            <table id="tabla-calificaciones">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Materia</th>
+                        <th>Calificación</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Juan Pérez</td>
+                        <td>Matemáticas</td>
+                        <td>95</td>
+                    </tr>
+                    <tr>
+                        <td>María García</td>
+                        <td>Español</td>
+                        <td>88</td>
+                    </tr>
+                    <tr>
+                        <td>Pedro Rodríguez</td>
+                        <td>Ciencias</td>
+                        <td>92</td>
+                    </tr>
+                    <tr>
+                        <td>Ana Fernández</td>
+                        <td>Historia</td>
+                        <td>89</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+        <section id="horarios">
+            <h2>Horarios</h2>
+            <p>Información de horarios. Aquí puedes ver los horarios de clases y actividades.</p>
+            <form id="form-horarios" onsubmit="addHorario(event)">
+                <input type="text" id="diaHorario" placeholder="Día" required>
+                <input type="text" id="materiaHorario" placeholder="Materia" required>
+                <input type="time" id="inicioHorario" required>
+                <input type="time" id="finHorario" required>
+                <button type="submit">Agregar</button>
+            </form>
+            <ul id="lista-horarios">
+                <li>Lunes - Matemáticas - 08:00 AM - 10:00 AM</li>
+                <li>Martes - Español - 10:00 AM - 12:00 PM</li>
+                <li>Miércoles - Ciencias - 08:00 AM - 10:00 AM</li>
+                <li>Jueves - Historia - 10:00 AM - 12:00 PM</li>
+            </ul>
+        </section>
+        <section id="asistencias">
+            <h2>Asistencias</h2>
+            <p>Registro de asistencias. Aquí puedes ver el registro de asistencias de los estudiantes.</p>
+            <form id="form-asistencias" onsubmit="addAsistencia(event)">
+                <input type="text" id="nombreAsistencia" placeholder="Nombre" required>
+                <input type="date" id="fechaAsistencia" required>
+                <select id="estadoAsistencia" required>
+                    <option value="Presente">Presente</option>
+                    <option value="Ausente">Ausente</option>
+                </select>
+                <button type="submit">Agregar</button>
+            </form>
+            <table id="tabla-asistencias">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Fecha</th>
+                        <th>Asistencia</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Juan Pérez</td>
+                        <td>01/06/2024</td>
+                        <td>Presente</td>
+                    </tr>
+                    <tr>
+                        <td>María García</td>
+                        <td>01/06/2024</td>
+                        <td>Ausente</td>
+                    </tr>
+                    <tr>
+                        <td>Pedro Rodríguez</td>
+                        <td>01/06/2024</td>
+                        <td>Presente</td>
+                    </tr>
+                    <tr>
+                        <td>Ana Fernández</td>
+                        <td>01/06/2024</td>
+                        <td>Presente</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+        <section id="documentacion">
+            <h2>Documentación</h2>
+            <p>Documentación disponible. Aquí puedes encontrar todos los documentos necesarios.</p>
+            <ul>
+                <li><a href="documentos/manual_usuario.pdf" target="_blank">Manual del Usuario</a></li>
+                <li><a href="documentos/guia_estudiante.pdf" target="_blank">Guía del Estudiante</a></li>
+                <li><a href="documentos/politicas_privacidad.pdf" target="_blank">Políticas de Privacidad</a></li>
+            </ul>
+        </section>
+        <section id="atencion">
+            <h2>Atención al Cliente</h2>
+            <p>Sección de atención al cliente. Aquí puedes encontrar información de contacto y soporte.</p>
+            <address>
+                <strong>Nombre de la Institución</strong><br>
+                Dirección: Calle Principal, Ciudad<br>
+                Teléfono: +123456789<br>
+                Correo Electrónico: info@institucion.com
+            </address>
+        </section>
+    </main>
+
+    <script>
+        function showSection(sectionId) {
+            var sections = document.getElementsByTagName('section');
+            for (var i = 0; i < sections.length; i++) {
+                sections[i].classList.remove('active');
+            }
+            var section = document.getElementById(sectionId);
+            section.classList.add('active');
+
+            // Actualizar el enlace activo
+            var navLinks = document.querySelectorAll('nav ul li a');
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+            });
+            document.querySelector(`nav ul li a[href="#${sectionId}"]`).classList.add('active');
+        }
+
+        function addInscrito(event) {
+            event.preventDefault();
+            var nombre = document.getElementById('nombreInscrito').value;
+            var lista = document.getElementById('lista-inscritos');
+            var nuevoInscrito = document.createElement('li');
+            nuevoInscrito.textContent = nombre;
+            lista.appendChild(nuevoInscrito);
+            document.getElementById('nombreInscrito').value = '';
+        }
+
+        function addCalificacion(event) {
+            event.preventDefault();
+            var nombre = document.getElementById('nombreCalificacion').value;
+            var materia = document.getElementById('materiaCalificacion').value;
+            var calificacion = document.getElementById('notaCalificacion').value;
+            var tabla = document.getElementById('tabla-calificaciones').getElementsByTagName('tbody')[0];
+            var nuevaFila = tabla.insertRow(-1);
+            var celdaNombre = nuevaFila.insertCell(0);
+            var celdaMateria = nuevaFila.insertCell(1);
+            var celdaCalificacion = nuevaFila.insertCell(2);
+            celdaNombre.textContent = nombre;
+            celdaMateria.textContent = materia;
+            celdaCalificacion.textContent = calificacion;
+            document.getElementById('nombreCalificacion').value = '';
+            document.getElementById('materiaCalificacion').value = '';
+            document.getElementById('notaCalificacion').value = '';
+        }
+
+        function addHorario(event) {
+            event.preventDefault();
+            var dia = document.getElementById('diaHorario').value;
+            var materia = document.getElementById('materiaHorario').value;
+            var inicio = document.getElementById('inicioHorario').value;
+            var fin = document.getElementById('finHorario').value;
+            var lista = document.getElementById('lista-horarios');
+            var nuevoHorario = document.createElement('li');
+            nuevoHorario.textContent = dia + ' - ' + materia + ' - ' + inicio + ' - ' + fin;
+            lista.appendChild(nuevoHorario);
+            document.getElementById('diaHorario').value = '';
+            document.getElementById('materiaHorario').value = '';
+            document.getElementById('inicioHorario').value = '';
+            document.getElementById('finHorario').value = '';
+        }
+
+        function addAsistencia(event) {
+            event.preventDefault();
+            var nombre = document.getElementById('nombreAsistencia').value;
+            var fecha = document.getElementById('fechaAsistencia').value;
+            var estado = document.getElementById('estadoAsistencia').value;
+            var tabla = document.getElementById('tabla-asistencias').getElementsByTagName('tbody')[0];
+            var nuevaFila = tabla.insertRow(-1);
+            var celdaNombre = nuevaFila.insertCell(0);
+            var celdaFecha = nuevaFila.insertCell(1);
+            var celdaEstado = nuevaFila.insertCell(2);
+            celdaNombre.textContent = nombre;
+            celdaFecha.textContent = fecha;
+            celdaEstado.textContent = estado;
+            document.getElementById('nombreAsistencia').value = '';
+            document.getElementById('fechaAsistencia').value = '';
+            document.getElementById('estadoAsistencia').value = 'Presente'; // Valor por defecto
+        }
+    </script>
+    <script src="/public/js/logout.js"></script>
+                <form id="logoutForm" action="/logout" method="post">
+                    <button type="submit" class="btn-cerrar-sesion">Cerrar Sesión</button>
+                </form>
+</body>
+</html>
