@@ -13,11 +13,11 @@ body {
 header {
     background-image: url("/public/img/vista-superior-escritorio-madera-telefono-inteligente-espacio-copia.jpg");
     width: 100%;
-    height: 600px;
+    height: 600px; /* Ajusta según tu diseño */
     background-size: cover;
     background-position: center;
-    overflow: hidden;
-    position: fixed;
+    position: relative; /* Cambiado de fixed a relative */
+    z-index: 1000; /* Asegura que el encabezado esté por encima del contenido */
 }
 
 header nav {
@@ -365,4 +365,54 @@ main{
         background-color: #f8f8f8;
         font-weight: bold;
     }
+}
+/* Estilos para las noticias */
+.noticias {
+    margin-top: 80px; /* Ajusta según sea necesario */
+    padding: 20px;
+    background-color: #f0f0f0;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.noticias h2 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.noticias ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.noticias li {
+    margin-bottom: 15px;
+    padding: 10px;
+    background-color: #fff;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.noticias li h3 {
+    font-size: 1.2rem;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+.noticias li p {
+    font-size: 1rem;
+    color: #666;
+}
+
+.noticias li a {
+    display: block;
+    font-size: 0.9rem;
+    color: #007bff;
+    text-decoration: none;
+    margin-top: 5px;
+}
+
+.noticias li a:hover {
+    text-decoration: underline;
 }

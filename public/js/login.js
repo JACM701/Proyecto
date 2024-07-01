@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const password = document.getElementById('password').value;
 
         // Validar los valores (puedes ajustar esta validación según tus necesidades)
-        if (username === 'usuario' && password === '123456') {
+        if (username === 'maestro' && password === '123456') {
             // Inicio de sesión exitoso
             message.innerHTML = '<p class="success">Inicio de sesión exitoso!</p>';
             // Aquí podrías redirigir al usuario a otra página, por ejemplo:

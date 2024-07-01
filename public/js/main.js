@@ -32,3 +32,33 @@ window.addEventListener('click',function(e){
         }
     }
 });
+// Archivo: /public/js/main.js
+
+document.addEventListener('DOMContentLoaded', () => {
+    const apiKey = 'ce1d4c8cf79d4221a50f44a251ac067e'; // API key de NewsAPI.org
+    const apiUrl = `https://newsapi.org/v2/top-headlines?country=mx&apiKey=${apiKey}`;
+
+    fetch(apiUrl)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log(data);
+            const listaNoticias = document.getElementById('lista-noticias');
+            data.articles.forEach(article => {
+                const listItem = document.createElement('li');
+                listItem.innerHTML = `
+                    <h3>${article.title}</h3>
+                    <p>${article.description}</p>
+                    <a href="${article.url}" target="_blank">Leer más</a>
+                `;
+                listaNoticias.appendChild(listItem);
+            });
+        })
+        .catch(error => {
+            console.error('Error fetching news data:', error);
+        });
+});
