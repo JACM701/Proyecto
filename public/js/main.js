@@ -62,3 +62,104 @@ document.addEventListener('DOMContentLoaded', () => {
             console.error('Error fetching news data:', error);
         });
 });
+//ALUMNO
+// main.js
+
+// Funciones para abrir y cerrar modales
+function openModal(modalId) {
+    var modal = document.getElementById(modalId);
+    modal.style.display = "block";
+}
+
+function closeModal(modalId) {
+    var modal = document.getElementById(modalId);
+    modal.style.display = "none";
+}
+
+// Función para enviar un mensaje
+function enviarMensaje(event) {
+    event.preventDefault();
+    var form = event.target;
+    var formData = new FormData(form);
+
+    fetch('http://tu_servidor/tu_backend.php', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log(data); // Manejo de la respuesta del backend
+        form.reset(); // Limpiar el formulario después de enviar
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+}
+
+// Función para agregar una calificación
+function agregarCalificacion(event) {
+    event.preventDefault();
+    var form = event.target;
+    var formData = new FormData(form);
+
+    fetch('http://tu_servidor/tu_backend.php?tabla=calificaciones', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log(data); // Manejo de la respuesta del backend
+        form.reset(); // Limpiar el formulario después de enviar
+        closeModal('agregarCalificacionModal'); // Cerrar el modal después de agregar
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+}
+
+// Función para agregar una asistencia
+function agregarAsistencia(event) {
+    event.preventDefault();
+    var form = event.target;
+    var formData = new FormData(form);
+
+    fetch('http://tu_servidor/tu_backend.php?tabla=asistencias', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log(data); // Manejo de la respuesta del backend
+        form.reset(); // Limpiar el formulario después de enviar
+        closeModal('agregarAsistenciaModal'); // Cerrar el modal después de agregar
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+}
+
+// Función para agregar un horario
+function agregarHorario(event) {
+    event.preventDefault();
+    var form = event.target;
+    var formData = new FormData(form);
+
+    fetch('http://tu_servidor/tu_backend.php?tabla=horarios', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log(data); // Manejo de la respuesta del backend
+        form.reset(); // Limpiar el formulario después de enviar
+        closeModal('agregarHorarioModal'); // Cerrar el modal después de agregar
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+}
+
+// Event listener para cargar datos al cargar la página
+document.addEventListener('DOMContentLoaded', function() {
+    // Puedes realizar acciones adicionales aquí si es necesario
+});

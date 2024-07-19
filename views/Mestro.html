@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Índice de la Página</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .hidden {
+            display: none;
+        }
+        .block {
+            display: block;
+        }
+        .active {
+            font-weight: bold;
+            color: #4A90E2;
+        }
+    </style>
+</head>
+<body class="font-sans bg-gray-100 text-gray-900">
+    <header class="bg-blue-600 text-white py-4">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="text-2xl font-bold">Bienvenido al Sistema</h1>
+            <nav>
+                <ul class="flex space-x-4">
+                    <li><a href="#inicio" onclick="showSection('inicio')" class="hover:text-gray-300">Inicio</a></li>
+                    <li><a href="#inscritos" onclick="showSection('inscritos')" class="hover:text-gray-300">Inscritos</a></li>
+                    <li><a href="#calificaciones" onclick="showSection('calificaciones')" class="hover:text-gray-300">Calificaciones</a></li>
+                    <li><a href="#horarios" onclick="showSection('horarios')" class="hover:text-gray-300">Horarios</a></li>
+                    <li><a href="#asistencias" onclick="showSection('asistencias')" class="hover:text-gray-300">Asistencias</a></li>
+                    <li><a href="#documentacion" onclick="showSection('documentacion')" class="hover:text-gray-300">Documentación</a></li>
+                    <li><a href="#atencion" onclick="showSection('atencion')" class="hover:text-gray-300">Atención</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <main class="container mx-auto p-4">
+        <section id="inicio" class="block">
+            <h2 class="text-xl font-semibold mb-2">Inicio</h2>
+            <p>Bienvenido, [Nombre del Maestro]. Estás asignado a los siguientes grupos:</p>
+            <ul class="list-disc pl-5 mt-2">
+                <li>Grupo A</li>
+                <li>Grupo B</li>
+            </ul>
+        </section>
+        <section id="inscritos" class="hidden">
+            <h2 class="text-xl font-semibold mb-2">Inscritos</h2>
+            <p>Lista de estudiantes en tus grupos asignados. Puedes buscar y ver los estudiantes.</p>
+            <input type="text" id="searchInscritos" placeholder="Buscar estudiante" oninput="filterInscritos()" class="mt-2 p-2 border border-gray-300 rounded-md w-full">
+            <ul id="lista-inscritos" class="mt-4">
+                <!-- Lista de inscritos generada dinámicamente -->
+            </ul>
+        </section>
+        <section id="calificaciones" class="hidden">
+            <h2 class="text-xl font-semibold mb-2">Calificaciones</h2>
+            <p>Selecciona un grupo y asigna calificaciones a los estudiantes de ese grupo.</p>
+            <form id="form-calificaciones" onsubmit="addCalificacion(event)" class="mt-4">
+                <div class="flex space-x-4 mb-4">
+                    <select id="selectGrupo" onchange="updateCalificaciones()" class="p-2 border border-gray-300 rounded-md flex-1">
+                        <option value="">Selecciona un grupo</option>
+                        <option value="Grupo A">Grupo A</option>
+                        <option value="Grupo B">Grupo B</option>
+                    </select>
+                    <select id="selectMateria" onchange="updateCalificaciones()" class="p-2 border border-gray-300 rounded-md flex-1">
+                        <option value="">Selecciona una materia</option>
+                        <option value="Matemáticas">Matemáticas</option>
+                        <option value="Español">Español</option>
+                    </select>
+                </div>
+                <ul id="lista-calificaciones" class="mt-4">
+                    <!-- Lista de calificaciones generada dinámicamente -->
+                </ul>
+            </form>
+        </section>
+        <section id="horarios" class="hidden">
+            <h2 class="text-xl font-semibold mb-2">Horarios</h2>
+            <p>Descarga los archivos de horarios proporcionados por el administrador.</p>
+            <ul id="lista-horarios" class="mt-4">
+                <!-- Lista de horarios generada dinámicamente -->
+                <li><a href="documentos/horarios.pdf" target="_blank" class="text-blue-600 hover:underline">Horarios</a></li>
+            </ul>
+        </section>
+        <section id="asistencias" class="hidden">
+            <h2 class="text-xl font-semibold mb-2">Asistencias</h2>
+            <p>Selecciona un grupo y marca la asistencia de los estudiantes.</p>
+            <form id="form-asistencias" onsubmit="addAsistencia(event)" class="mt-4">
+                <select id="selectGrupoAsistencias" onchange="updateAsistencias()" class="p-2 border border-gray-300 rounded-md">
+                    <option value="">Selecciona un grupo</option>
+                    <option value="Grupo A">Grupo A</option>
+                    <option value="Grupo B">Grupo B</option>
+                </select>
+                <ul id="lista-asistencias" class="mt-4">
+                    <!-- Lista de asistencias generada dinámicamente -->
+                </ul>
+            </form>
+        </section>
+        <section id="documentacion" class="hidden">
+            <h2 class="text-xl font-semibold mb-2">Documentación</h2>
+            <p>Accede a la documentación proporcionada por el administrador.</p>
+            <ul id="lista-documentos" class="mt-4">
+                <!-- Lista de documentos generada dinámicamente -->
+                <li><a href="documentos/manual_usuario.pdf" target="_blank" class="text-blue-600 hover:underline">Manual del Usuario</a></li>
+            </ul>
+            <div id="respuestas-documentacion" class="mt-4">
+                <h3 class="text-lg font-semibold mb-2">Respuestas del Administrador</h3>
+                <ul>
+                    <!-- Respuestas del administrador -->
+                </ul>
+            </div>
+        </section>
+        <section id="atencion" class="hidden">
+            <h2 class="text-xl font-semibold mb-2">Atención al Cliente</h2>
+            <p>Envíanos tus quejas o consultas al administrador.</p>
+            <form id="form-atencion" onsubmit="sendQueja(event)" class="mt-4">
+                <textarea id="queja" placeholder="Escribe tu queja o consulta aquí" required class="p-2 border border-gray-300 rounded-md w-full h-32"></textarea>
+                <button type="submit" class="mt-2 bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700">Enviar</button>
+            </form>
+            <div id="respuestas-atencion" class="mt-4">
+                <h3 class="text-lg font-semibold mb-2">Respuestas del Administrador</h3>
+                <ul>
+                    <!-- Respuestas del administrador -->
+                </ul>
+            </div>
+        </section>
+    </main>
+    <script>
+        function showSection(sectionId) {
+            console.log(`Mostrando sección: ${sectionId}`); // Depuración
+            var sections = document.querySelectorAll('main section');
+            sections.forEach(section => {
+                section.classList.add('hidden'); // Oculta todas las secciones
+            });
+            var section = document.getElementById(sectionId);
+            if (section) {
+                section.classList.remove('hidden'); // Muestra la sección deseada
+            } else {
+                console.error(`No se encontró la sección con ID: ${sectionId}`);
+            }
+
+            // Actualizar el enlace activo
+            var navLinks = document.querySelectorAll('nav ul li a');
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+            });
+            var activeLink = document.querySelector(`nav ul li a[href="#${sectionId}"]`);
+            if (activeLink) {
+                activeLink.classList.add('active');
+            } else {
+                console.error(`No se encontró el enlace con href: #${sectionId}`);
+            }
+        }
+
+        function filterInscritos() {
+            var input = document.getElementById('searchInscritos');
+            var filter = input.value.toLowerCase();
+            var lista = document.getElementById('lista-inscritos');
+            var items = lista.getElementsByTagName('li');
+            console.log(`Filtrando inscritos con: ${filter}`); // Depuración
+            for (var i = 0; i < items.length; i++) {
+                var texto = items[i].textContent.toLowerCase();
+                items[i].style.display = texto.includes(filter) ? "" : "none";
+            }
+        }
+
+        function updateCalificaciones() {
+            console.log("Actualizando calificaciones"); // Depuración
+            // Lógica para actualizar la lista de calificaciones según el grupo y materia seleccionados
+        }
+
+        function updateAsistencias() {
+            console.log("Actualizando asistencias"); // Depuración
+            // Lógica para actualizar la lista de asistencias según el grupo seleccionado
+        }
+
+        function sendQueja(event) {
+            event.preventDefault();
+            var queja = document.getElementById('queja').value;
+            console.log(`Enviando queja: ${queja}`); // Depuración
+            // Lógica para enviar la queja al administrador
+            document.getElementById('queja').value = '';
+
+            // Agregar la respuesta del administrador (simulación)
+            var respuestas = document.getElementById('respuestas-atencion').querySelector('ul');
+            var respuestaItem = document.createElement('li');
+            respuestaItem.textContent = `Respuesta a: "${queja}" - Respuesta del administrador aquí.`;
+            respuestas.appendChild(respuestaItem);
+        }
+
+        function agregarRespuestaDocumentacion(respuesta) {
+            console.log(`Agregando respuesta en Documentación: ${respuesta}`); // Depuración
+            var respuestas = document.getElementById('respuestas-documentacion').querySelector('ul');
+            var respuestaItem = document.createElement('li');
+            respuestaItem.textContent = respuesta;
+            respuestas.appendChild(respuestaItem);
+        }
+
+        // Ejemplo de respuestas en Documentación
+        agregarRespuestaDocumentacion("Respuesta del administrador sobre el Manual del Usuario.");
+        
+    </script>
+<button id="logoutButton" class="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600">Cerrar Sesión</button>
+
+<script>
+    document.getElementById('logoutButton').addEventListener('click', function(event) {
+        event.preventDefault();
+        // Redirigir a la página de inicio de sesión
+        window.location.href = '/views/index.html';
+    });
+</script>
+</body>
+</html>

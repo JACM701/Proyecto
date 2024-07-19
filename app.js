@@ -6,8 +6,8 @@ let mysql = require('mysql');
 let connection = mysql.createConnection({
     host: 'localhost',
     user: 'root', // El usuario que creaste en MySQL
-    password: '', // La contraseña del usuario
-    database: 'collegueadmin' // El nombre de la base de datos que creaste
+    password: 'tu_contraseña', // La contraseña del usuario
+    database: 'gary_goodsped;' // El nombre de la base de datos que creaste
 });
 
 // Conectar a MySQL

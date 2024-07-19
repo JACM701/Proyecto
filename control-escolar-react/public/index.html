@@ -35,11 +35,12 @@
                 <button type="submit">Agregar</button>
             </form>
             <ul id="lista-inscritos">
-                <li>Juan Pérez</li>
-                <li>María García</li>
-                <li>Pedro Rodríguez</li>
-                <li>Ana Fernández</li>
+                <li>Juan Pérez <button onclick="openEditarModal('Juan Pérez')">Editar</button> <button onclick="confirmarEliminar('Juan Pérez')">Eliminar</button></li>
+                <li>María García <button onclick="openEditarModal('María García')">Editar</button> <button onclick="confirmarEliminar('María García')">Eliminar</button></li>
+                <li>Pedro Rodríguez <button onclick="openEditarModal('Pedro Rodríguez')">Editar</button> <button onclick="confirmarEliminar('Pedro Rodríguez')">Eliminar</button></li>
+                <li>Ana Fernández <button onclick="openEditarModal('Ana Fernández')">Editar</button> <button onclick="confirmarEliminar('Ana Fernández')">Eliminar</button></li>
             </ul>
+            
         </section>
         <section id="calificaciones">
             <h2>Calificaciones</h2>
@@ -56,6 +57,7 @@
                         <th>Nombre</th>
                         <th>Materia</th>
                         <th>Calificación</th>
+                        <th>Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -63,21 +65,25 @@
                         <td>Juan Pérez</td>
                         <td>Matemáticas</td>
                         <td>95</td>
+                        <td><button onclick="openEditarModal('Juan Pérez')">Editar</button> <button onclick="confirmarEliminar('Juan Pérez')">Eliminar</button></td>
                     </tr>
                     <tr>
                         <td>María García</td>
                         <td>Español</td>
                         <td>88</td>
+                        <td><button onclick="openEditarModal('María García')">Editar</button> <button onclick="confirmarEliminar('María García')">Eliminar</button></td>
                     </tr>
                     <tr>
                         <td>Pedro Rodríguez</td>
                         <td>Ciencias</td>
                         <td>92</td>
+                        <td><button onclick="openEditarModal('Pedro Rodríguez')">Editar</button> <button onclick="confirmarEliminar('Pedro Rodríguez')">Eliminar</button></td>
                     </tr>
                     <tr>
                         <td>Ana Fernández</td>
                         <td>Historia</td>
                         <td>89</td>
+                        <td><button onclick="openEditarModal('Ana Fernández')">Editar</button> <button onclick="confirmarEliminar('Ana Fernández')">Eliminar</button></td>
                     </tr>
                 </tbody>
             </table>
@@ -117,6 +123,7 @@
                         <th>Nombre</th>
                         <th>Fecha</th>
                         <th>Asistencia</th>
+                        <th>Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -124,21 +131,25 @@
                         <td>Juan Pérez</td>
                         <td>01/06/2024</td>
                         <td>Presente</td>
+                        <td><button onclick="openEditarModal('Juan Pérez')">Editar</button> <button onclick="confirmarEliminar('Juan Pérez')">Eliminar</button></td>
                     </tr>
                     <tr>
                         <td>María García</td>
                         <td>01/06/2024</td>
                         <td>Ausente</td>
+                        <td><button onclick="openEditarModal('María García')">Editar</button> <button onclick="confirmarEliminar('María García')">Eliminar</button></td>
                     </tr>
                     <tr>
                         <td>Pedro Rodríguez</td>
                         <td>01/06/2024</td>
                         <td>Presente</td>
+                        <td><button onclick="openEditarModal('Pedro Rodríguez')">Editar</button> <button onclick="confirmarEliminar('Pedro Rodríguez')">Eliminar</button></td>
                     </tr>
                     <tr>
                         <td>Ana Fernández</td>
                         <td>01/06/2024</td>
                         <td>Presente</td>
+                        <td><button onclick="openEditarModal('Ana Fernández')">Editar</button> <button onclick="confirmarEliminar('Ana Fernández')">Eliminar</button></td>
                     </tr>
                 </tbody>
             </table>
@@ -164,88 +175,25 @@
         </section>
     </main>
 
-    <script>
-        function showSection(sectionId) {
-            var sections = document.getElementsByTagName('section');
-            for (var i = 0; i < sections.length; i++) {
-                sections[i].classList.remove('active');
-            }
-            var section = document.getElementById(sectionId);
-            section.classList.add('active');
+    <!-- Modal para editar y eliminar -->
+    <div id="modalEditarEliminar" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('modalEditarEliminar')">&times;</span>
+            <h2>Editar o Eliminar Registro</h2>
+            <form id="formEditarEliminar">
+                <input type="hidden" id="registroActual">
+                <label for="editNombre">Nombre:</label>
+                <input type="text" id="editNombre" required>
+                <button type="button" onclick="editarRegistro()">Guardar Cambios</button>
+                <button type="button" onclick="eliminarRegistro()">Eliminar</button>
+            </form>
+        </div>
+    </div>
 
-            // Actualizar el enlace activo
-            var navLinks = document.querySelectorAll('nav ul li a');
-            navLinks.forEach(link => {
-                link.classList.remove('active');
-            });
-            document.querySelector(`nav ul li a[href="#${sectionId}"]`).classList.add('active');
-        }
-
-        function addInscrito(event) {
-            event.preventDefault();
-            var nombre = document.getElementById('nombreInscrito').value;
-            var lista = document.getElementById('lista-inscritos');
-            var nuevoInscrito = document.createElement('li');
-            nuevoInscrito.textContent = nombre;
-            lista.appendChild(nuevoInscrito);
-            document.getElementById('nombreInscrito').value = '';
-        }
-
-        function addCalificacion(event) {
-            event.preventDefault();
-            var nombre = document.getElementById('nombreCalificacion').value;
-            var materia = document.getElementById('materiaCalificacion').value;
-            var calificacion = document.getElementById('notaCalificacion').value;
-            var tabla = document.getElementById('tabla-calificaciones').getElementsByTagName('tbody')[0];
-            var nuevaFila = tabla.insertRow(-1);
-            var celdaNombre = nuevaFila.insertCell(0);
-            var celdaMateria = nuevaFila.insertCell(1);
-            var celdaCalificacion = nuevaFila.insertCell(2);
-            celdaNombre.textContent = nombre;
-            celdaMateria.textContent = materia;
-            celdaCalificacion.textContent = calificacion;
-            document.getElementById('nombreCalificacion').value = '';
-            document.getElementById('materiaCalificacion').value = '';
-            document.getElementById('notaCalificacion').value = '';
-        }
-
-        function addHorario(event) {
-            event.preventDefault();
-            var dia = document.getElementById('diaHorario').value;
-            var materia = document.getElementById('materiaHorario').value;
-            var inicio = document.getElementById('inicioHorario').value;
-            var fin = document.getElementById('finHorario').value;
-            var lista = document.getElementById('lista-horarios');
-            var nuevoHorario = document.createElement('li');
-            nuevoHorario.textContent = dia + ' - ' + materia + ' - ' + inicio + ' - ' + fin;
-            lista.appendChild(nuevoHorario);
-            document.getElementById('diaHorario').value = '';
-            document.getElementById('materiaHorario').value = '';
-            document.getElementById('inicioHorario').value = '';
-            document.getElementById('finHorario').value = '';
-        }
-
-        function addAsistencia(event) {
-            event.preventDefault();
-            var nombre = document.getElementById('nombreAsistencia').value;
-            var fecha = document.getElementById('fechaAsistencia').value;
-            var estado = document.getElementById('estadoAsistencia').value;
-            var tabla = document.getElementById('tabla-asistencias').getElementsByTagName('tbody')[0];
-            var nuevaFila = tabla.insertRow(-1);
-            var celdaNombre = nuevaFila.insertCell(0);
-            var celdaFecha = nuevaFila.insertCell(1);
-            var celdaEstado = nuevaFila.insertCell(2);
-            celdaNombre.textContent = nombre;
-            celdaFecha.textContent = fecha;
-            celdaEstado.textContent = estado;
-            document.getElementById('nombreAsistencia').value = '';
-            document.getElementById('fechaAsistencia').value = '';
-            document.getElementById('estadoAsistencia').value = 'Presente'; // Valor por defecto
-        }
-    </script>
+    <script src="Interfaz.js"></script>
     <script src="/public/js/logout.js"></script>
-                <form id="logoutForm" action="/logout" method="post">
-                    <button type="submit" class="btn-cerrar-sesion">Cerrar Sesión</button>
-                </form>
+    <form id="logoutForm" action="/logout" method="post">
+        <button type="submit" class="btn-cerrar-sesion">Cerrar Sesión</button>
+    </form>
 </body>
 </html>

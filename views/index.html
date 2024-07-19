@@ -3,35 +3,201 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Menú animado</title>
-    <link rel="stylesheet" href="/public/css/estilos.css">
-    <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,700,800" rel="stylesheet">
+    <title>Inicio de Sesión</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5); }
+        .modal-content { background: white; margin: 15% auto; padding: 20px; width: 80%; max-width: 500px; }
+        .close { float: right; font-size: 1.5em; cursor: pointer; }
+        .success { color: green; }
+        .error { color: red; }
+        .admin-only { display: none; }
+    </style>
 </head>
-<body>
-    <header>
-        <nav>
-            <div class="logo">
-                <img src="/public/img/LogoS.png" alt="Logo">
+<body class="bg-gray-100 font-raleway">
+    <div class="container mx-auto p-6 max-w-md bg-white shadow-md rounded-lg mt-10">
+        <h1 class="text-3xl font-bold text-center mb-4">Inicio de Sesión</h1>
+        <form id="loginForm">
+            <div class="mb-4">
+                <input type="text" id="username" name="username" class="w-full p-2 border border-gray-300 rounded" required>
+                <label for="username" class="text-gray-700">Nombre de Usuario o ID si eres estudiante</label>
             </div>
-            <div class="icono" id="icono">
-                <span>&#9776;</span>
+            <div class="mb-4">
+                <input type="password" id="password" name="password" class="w-full p-2 border border-gray-300 rounded" required>
+                <label for="password" class="text-gray-700">Contraseña</label>
             </div>
-            <div class="enlaces uno" id="enlaces">
-                <a href="/views/index.html" class="active">Inicio</a>
-                <a href="registrado.html">Acceso a Alumno</a>
-                <a href="login.html">Acceso a Docente</a>
+            <div class="mb-4">
+                <label for="role" class="text-gray-700">Elige tu Rol:</label>
+                <select id="role" name="role" class="w-full p-2 border border-gray-300 rounded">
+                    <option value="maestro">Maestro</option>
+                    <option value="estudiante">Estudiante</option>
+                </select>
             </div>
-        </nav>
-        <div class="textos">
-            <h1>Consulta tus datos</h1>
-            <h2>Página de inicio para estudiantes y maestros</h2>
+            <div class="mb-4">
+                <a href="#" id="forgotPassword" class="text-blue-500 hover:underline">¿Olvidó su Contraseña?</a>
+            </div>
+            <button type="submit" class="w-full bg-blue-500 text-white py-2 rounded">Iniciar Sesión</button>
+        </form>
+        <div id="message" class="mt-4"></div>
+        <a href="#" id="adminAccess" class="text-red-500 hover:underline mt-4">Acceso para Administrador</a>
+    </div>
+
+    <div id="adminModal" class="modal admin-only">
+        <div class="modal-content">
+            <span class="close" id="closeAdminModal">&times;</span>
+            <h2 class="text-2xl font-bold mb-4">Inicio de Sesión Administrador</h2>
+            <form id="adminLoginForm">
+                <div class="mb-4">
+                    <label for="adminUsername" class="block text-gray-700">Nombre de Usuario:</label>
+                    <input type="text" id="adminUsername" name="adminUsername" class="w-full p-2 border border-gray-300 rounded" required>
+                </div>
+                <div class="mb-4">
+                    <label for="adminPassword" class="block text-gray-700">Contraseña:</label>
+                    <input type="password" id="adminPassword" name="adminPassword" class="w-full p-2 border border-gray-300 rounded" required>
+                </div>
+                <button type="submit" class="w-full bg-blue-500 text-white py-2 rounded">Acceder</button>
+            </form>
+            <div id="adminMessage" class="mt-4"></div>
         </div>
-        <div id="noticias" class="noticias">
-            <h2>Últimas Noticias</h2>
-            <ul id="lista-noticias"></ul>
+    </div>
+
+    <div id="registerModal" class="modal">
+        <div class="modal-content">
+            <span class="close" id="closeModal">&times;</span>
+            <h2 class="text-2xl font-bold mb-4">Registro de Estudiante</h2>
+            <form id="registerForm">
+                <div class="mb-4">
+                    <label for="nombre" class="block text-gray-700">Nombre:</label>
+                    <input type="text" id="nombre" name="nombre" class="w-full p-2 border border-gray-300 rounded" required>
+                </div>
+                <div class="mb-4">
+                    <label for="apellido" class="block text-gray-700">Apellido:</label>
+                    <input type="text" id="apellido" name="apellido" class="w-full p-2 border border-gray-300 rounded" required>
+                </div>
+                <div class="mb-4">
+                    <label for="email" class="block text-gray-700">Correo Electrónico:</label>
+                    <input type="email" id="email" name="email" class="w-full p-2 border border-gray-300 rounded" required>
+                </div>
+                <div class="mb-4">
+                    <label for="studentIdReg" class="block text-gray-700">ID de Estudiante:</label>
+                    <input type="text" id="studentIdReg" name="studentIdReg" class="w-full p-2 border border-gray-300 rounded" required>
+                </div>
+                <div class="mb-4">
+                    <label for="passwordReg" class="block text-gray-700">Contraseña:</label>
+                    <input type="password" id="passwordReg" name="passwordReg" class="w-full p-2 border border-gray-300 rounded" required>
+                </div>
+                <button type="submit" class="w-full bg-blue-500 text-white py-2 rounded">Registrarse</button>
+            </form>
+            <div id="registerMessage" class="mt-4"></div>
         </div>
-    </header>
-    <script src="/public/js/main.js"></script>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('loginForm');
+            const message = document.getElementById('message');
+            const registerLink = document.getElementById('registerLink');
+            const registerModal = document.getElementById('registerModal');
+            const closeModal = document.getElementById('closeModal');
+            const registerForm = document.getElementById('registerForm');
+            const adminAccess = document.getElementById('adminAccess');
+            const adminModal = document.getElementById('adminModal');
+            const closeAdminModal = document.getElementById('closeAdminModal');
+            const adminLoginForm = document.getElementById('adminLoginForm');
+            const adminMessage = document.getElementById('adminMessage');
+
+            form.addEventListener('submit', function(event) {
+                event.preventDefault(); // Evitar que el formulario se envíe automáticamente
+
+                // Obtener los valores del formulario
+                const username = document.getElementById('username').value;
+                const password = document.getElementById('password').value;
+                const role = document.getElementById('role').value;
+
+                // Validar los valores (puedes ajustar esta validación según tus necesidades)
+                if (role === 'maestro' && username === 'maestro' && password === '123456') {
+                    message.innerHTML = '<p class="success">Inicio de sesión exitoso!</p>';
+                    sessionStorage.setItem('isLoggedIn', 'true');
+                    window.location.href = '/views/Mestro.html';
+                } else if (role === 'estudiante' && username === 'estudiante' && password === '123') {
+                    message.innerHTML = '<p class="success">Inicio de sesión exitoso!</p>';
+                    sessionStorage.setItem('isLoggedIn', 'true');
+                    window.location.href = '/views/estudiante.html';
+                } else {
+                    message.innerHTML = '<p class="error">Credenciales incorrectas. Inténtalo de nuevo.</p>';
+                }
+            });
+
+            adminAccess.addEventListener('click', function(e) {
+                e.preventDefault();
+                adminModal.style.display = 'block';
+            });
+
+            closeAdminModal.addEventListener('click', function() {
+                adminModal.style.display = 'none';
+            });
+
+            window.addEventListener('click', function(event) {
+                if (event.target === adminModal) {
+                    adminModal.style.display = 'none';
+                }
+            });
+
+            adminLoginForm.addEventListener('submit', function(event) {
+                event.preventDefault(); // Evitar que el formulario se envíe automáticamente
+
+                const adminUsername = document.getElementById('adminUsername').value;
+                const adminPassword = document.getElementById('adminPassword').value;
+
+                // Validar los valores del formulario de administrador
+                if (adminUsername === 'admin' && adminPassword === 'admin123') {
+                    adminMessage.innerHTML = '<p class="success">Acceso de administrador exitoso!</p>';
+                    sessionStorage.setItem('isAdminLoggedIn', 'true');
+                    window.location.href = '/views/Administrador.html'; // Redirigir al panel de administración
+                } else {
+                    adminMessage.innerHTML = '<p class="error">Credenciales de administrador incorrectas. Inténtalo de nuevo.</p>';
+                }
+            });
+
+            document.getElementById('forgotPassword').addEventListener('click', function(e) {
+                e.preventDefault();
+                alert('¡Lo siento! Esta función aún no está disponible.');
+            });
+
+            closeModal.addEventListener('click', function() {
+                registerModal.style.display = 'none';
+            });
+
+            window.addEventListener('click', function(event) {
+                if (event.target === registerModal) {
+                    registerModal.style.display = 'none';
+                }
+            });
+
+            registerForm.addEventListener('submit', function(event) {
+                event.preventDefault(); // Evitar que el formulario se envíe automáticamente
+
+                const nombre = document.getElementById('nombre').value;
+                const apellido = document.getElementById('apellido').value;
+                const email = document.getElementById('email').value;
+                const studentIdReg = document.getElementById('studentIdReg').value;
+                const passwordReg = document.getElementById('passwordReg').value;
+
+                // Simulación de mensaje de registro exitoso
+                const registerMessage = document.getElementById('registerMessage');
+                registerMessage.innerHTML = `<p class="success">¡Registro exitoso para ${nombre} ${apellido}!</p>`;
+
+                // Limpiar el formulario después del registro
+                registerForm.reset();
+
+                // Cerrar el modal después del registro exitoso (opcional)
+                setTimeout(function() {
+                    registerModal.style.display = 'none';
+                    registerMessage.innerHTML = '';
+                }, 1500); // Cerrar después de 1.5 segundos
+            });
+        });
+        //Recuerda josue debes mover todo esto al final
+    </script>
 </body>
 </html>
