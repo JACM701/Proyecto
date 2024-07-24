@@ -6,9 +6,9 @@
     <title>Inicio de Sesión</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <style>
-        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5); }
-        .modal-content { background: white; margin: 15% auto; padding: 20px; width: 80%; max-width: 500px; }
-        .close { float: right; font-size: 1.5em; cursor: pointer; }
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5); justify-content: center; align-items: center; }
+        .modal-content { background: white; padding: 20px; width: 80%; max-width: 500px; border-radius: 8px; position: relative; }
+        .close { position: absolute; top: 10px; right: 10px; font-size: 1.5em; cursor: pointer; }
         .success { color: green; }
         .error { color: red; }
         .admin-only { display: none; }
@@ -92,112 +92,146 @@
         </div>
     </div>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const form = document.getElementById('loginForm');
-            const message = document.getElementById('message');
-            const registerLink = document.getElementById('registerLink');
-            const registerModal = document.getElementById('registerModal');
-            const closeModal = document.getElementById('closeModal');
-            const registerForm = document.getElementById('registerForm');
-            const adminAccess = document.getElementById('adminAccess');
-            const adminModal = document.getElementById('adminModal');
-            const closeAdminModal = document.getElementById('closeAdminModal');
-            const adminLoginForm = document.getElementById('adminLoginForm');
-            const adminMessage = document.getElementById('adminMessage');
+    <div id="forgotPasswordModal" class="modal">
+        <div class="modal-content">
+            <span class="close" id="closeForgotPasswordModal">&times;</span>
+            <h2 class="text-2xl font-bold mb-4">Recuperación de Contraseña</h2>
+            <form id="forgotPasswordForm">
+                <div class="mb-4">
+                    <label for="forgotEmail" class="block text-gray-700">Correo Electrónico:</label>
+                    <input type="email" id="forgotEmail" name="forgotEmail" class="w-full p-2 border border-gray-300 rounded" required>
+                </div>
+                <button type="submit" class="w-full bg-blue-500 text-white py-2 rounded">Enviar Instrucciones</button>
+            </form>
+            <div id="forgotPasswordMessage" class="mt-4"></div>
+        </div>
+    </div>
 
-            form.addEventListener('submit', function(event) {
-                event.preventDefault(); // Evitar que el formulario se envíe automáticamente
-
-                // Obtener los valores del formulario
-                const username = document.getElementById('username').value;
-                const password = document.getElementById('password').value;
-                const role = document.getElementById('role').value;
-
-                // Validar los valores (puedes ajustar esta validación según tus necesidades)
-                if (role === 'maestro' && username === 'maestro' && password === '123456') {
-                    message.innerHTML = '<p class="success">Inicio de sesión exitoso!</p>';
-                    sessionStorage.setItem('isLoggedIn', 'true');
-                    window.location.href = '/views/Mestro.html';
-                } else if (role === 'estudiante' && username === 'estudiante' && password === '123') {
-                    message.innerHTML = '<p class="success">Inicio de sesión exitoso!</p>';
-                    sessionStorage.setItem('isLoggedIn', 'true');
-                    window.location.href = '/views/estudiante.html';
-                } else {
-                    message.innerHTML = '<p class="error">Credenciales incorrectas. Inténtalo de nuevo.</p>';
-                }
-            });
-
-            adminAccess.addEventListener('click', function(e) {
-                e.preventDefault();
-                adminModal.style.display = 'block';
-            });
-
-            closeAdminModal.addEventListener('click', function() {
-                adminModal.style.display = 'none';
-            });
-
-            window.addEventListener('click', function(event) {
-                if (event.target === adminModal) {
-                    adminModal.style.display = 'none';
-                }
-            });
-
-            adminLoginForm.addEventListener('submit', function(event) {
-                event.preventDefault(); // Evitar que el formulario se envíe automáticamente
-
-                const adminUsername = document.getElementById('adminUsername').value;
-                const adminPassword = document.getElementById('adminPassword').value;
-
-                // Validar los valores del formulario de administrador
-                if (adminUsername === 'admin' && adminPassword === 'admin123') {
-                    adminMessage.innerHTML = '<p class="success">Acceso de administrador exitoso!</p>';
-                    sessionStorage.setItem('isAdminLoggedIn', 'true');
-                    window.location.href = '/views/Administrador.html'; // Redirigir al panel de administración
-                } else {
-                    adminMessage.innerHTML = '<p class="error">Credenciales de administrador incorrectas. Inténtalo de nuevo.</p>';
-                }
-            });
-
-            document.getElementById('forgotPassword').addEventListener('click', function(e) {
-                e.preventDefault();
-                alert('¡Lo siento! Esta función aún no está disponible.');
-            });
-
-            closeModal.addEventListener('click', function() {
-                registerModal.style.display = 'none';
-            });
-
-            window.addEventListener('click', function(event) {
-                if (event.target === registerModal) {
-                    registerModal.style.display = 'none';
-                }
-            });
-
-            registerForm.addEventListener('submit', function(event) {
-                event.preventDefault(); // Evitar que el formulario se envíe automáticamente
-
-                const nombre = document.getElementById('nombre').value;
-                const apellido = document.getElementById('apellido').value;
-                const email = document.getElementById('email').value;
-                const studentIdReg = document.getElementById('studentIdReg').value;
-                const passwordReg = document.getElementById('passwordReg').value;
-
-                // Simulación de mensaje de registro exitoso
-                const registerMessage = document.getElementById('registerMessage');
-                registerMessage.innerHTML = `<p class="success">¡Registro exitoso para ${nombre} ${apellido}!</p>`;
-
-                // Limpiar el formulario después del registro
-                registerForm.reset();
-
-                // Cerrar el modal después del registro exitoso (opcional)
-                setTimeout(function() {
-                    registerModal.style.display = 'none';
-                    registerMessage.innerHTML = '';
-                }, 1500); // Cerrar después de 1.5 segundos
-            });
+    <script>document.addEventListener('DOMContentLoaded', function() {
+        const form = document.getElementById('loginForm');
+        const message = document.getElementById('message');
+        const registerModal = document.getElementById('registerModal');
+        const closeModal = document.getElementById('closeModal');
+        const registerForm = document.getElementById('registerForm');
+        const adminAccess = document.getElementById('adminAccess');
+        const adminModal = document.getElementById('adminModal');
+        const closeAdminModal = document.getElementById('closeAdminModal');
+        const adminLoginForm = document.getElementById('adminLoginForm');
+        const adminMessage = document.getElementById('adminMessage');
+        const forgotPassword = document.getElementById('forgotPassword');
+        const forgotPasswordModal = document.getElementById('forgotPasswordModal');
+        const closeForgotPasswordModal = document.getElementById('closeForgotPasswordModal');
+        const forgotPasswordForm = document.getElementById('forgotPasswordForm');
+        const forgotPasswordMessage = document.getElementById('forgotPasswordMessage');
+    
+        form.addEventListener('submit', function(event) {
+            event.preventDefault();
+    
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const role = document.getElementById('role').value;
+    
+            if (role === 'maestro' && username === 'maestro' && password === '123456') {
+                message.innerHTML = '<p class="success">Inicio de sesión exitoso!</p>';
+                sessionStorage.setItem('isLoggedIn', 'true');
+                window.location.href = '/views/Mestro.html';
+            } else if (role === 'estudiante' && username === 'estudiante' && password === '123') {
+                message.innerHTML = '<p class="success">Inicio de sesión exitoso!</p>';
+                sessionStorage.setItem('isLoggedIn', 'true');
+                window.location.href = '/views/estudiante.html';
+            } else {
+                message.innerHTML = '<p class="error">Credenciales incorrectas. Inténtalo de nuevo.</p>';
+            }
         });
-        //Recuerda josue debes mover todo esto al final
+    
+        adminAccess.addEventListener('click', function(e) {
+            e.preventDefault();
+            adminModal.style.display = 'flex';
+        });
+    
+        closeAdminModal.addEventListener('click', function() {
+            adminModal.style.display = 'none';
+        });
+    
+        forgotPassword.addEventListener('click', function(e) {
+            e.preventDefault();
+            forgotPasswordModal.style.display = 'flex';
+        });
+    
+        closeForgotPasswordModal.addEventListener('click', function() {
+            forgotPasswordModal.style.display = 'none';
+        });
+    
+        window.addEventListener('click', function(event) {
+            if (event.target === adminModal) {
+                adminModal.style.display = 'none';
+            }
+            if (event.target === forgotPasswordModal) {
+                forgotPasswordModal.style.display = 'none';
+            }
+        });
+    
+        adminLoginForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+    
+            const adminUsername = document.getElementById('adminUsername').value;
+            const adminPassword = document.getElementById('adminPassword').value;
+    
+            if (adminUsername === 'admin' && adminPassword === 'admin123') {
+                adminMessage.innerHTML = '<p class="success">Acceso de administrador exitoso!</p>';
+                sessionStorage.setItem('isAdminLoggedIn', 'true');
+                window.location.href = '/views/Administrador.html';
+            } else {
+                adminMessage.innerHTML = '<p class="error">Credenciales de administrador incorrectas. Inténtalo de nuevo.</p>';
+            }
+        });
+    
+        forgotPasswordForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+    
+            const forgotEmail = document.getElementById('forgotEmail').value;
+    
+            // Simulación de mensaje de envío exitoso
+            forgotPasswordMessage.innerHTML = `<p class="success">¡Instrucciones de recuperación enviadas a ${forgotEmail}!</p>`;
+    
+            forgotPasswordForm.reset();
+    
+            setTimeout(function() {
+                forgotPasswordModal.style.display = 'none';
+                forgotPasswordMessage.innerHTML = '';
+            }, 1500);
+        });
+    
+        closeModal.addEventListener('click', function() {
+            registerModal.style.display = 'none';
+        });
+    
+        window.addEventListener('click', function(event) {
+            if (event.target === registerModal) {
+                registerModal.style.display = 'none';
+            }
+        });
+    
+        registerForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+    
+            const nombre = document.getElementById('nombre').value;
+            const apellido = document.getElementById('apellido').value;
+            const email = document.getElementById('email').value;
+            const studentIdReg = document.getElementById('studentIdReg').value;
+            const passwordReg = document.getElementById('passwordReg').value;
+    
+            const registerMessage = document.getElementById('registerMessage');
+            registerMessage.innerHTML = `<p class="success">¡Registro exitoso para ${nombre} ${apellido}!</p>`;
+    
+            registerForm.reset();
+    
+            setTimeout(function() {
+                registerModal.style.display = 'none';
+                registerMessage.innerHTML = '';
+            }, 1500);
+        });
+    });
     </script>
 </body>
 </html>
